@@ -32,6 +32,11 @@ std::vector<std::string> toPostfix(const std::string& infix) {
             
             std::string operand;
             while (i < infix.size() && isOperand(infix[i])) {
+                if (isalpha(infix[i])) {
+                    output.clear();
+                    output.push_back("ERROR_LETTER");
+                    return output;
+                }
                 operand += infix[i];
                 i++;
             }
@@ -67,6 +72,12 @@ std::vector<std::string> toPostfix(const std::string& infix) {
 }
 
 double calculate(const std::vector<std::string>& postfix) {
+    // Проверка на ошибку с буквой
+    if (!postfix.empty() && postfix[0] == "ERROR_LETTER") {
+        std::cout << "ОШИБКА: Нельзя использовать буквы, только числа!" << std::endl;
+        return 0;
+    }
+    
     std::stack<double> st;
     
     for (const auto& token : postfix) {
@@ -88,7 +99,7 @@ double calculate(const std::vector<std::string>& postfix) {
 }
 
 int main() {
-    std::string expr = "3 + 4 * 2";
+    std::string expr = "(1 + 3)/10*5-((2+3)*2+3)";
     
     std::cout << "Инфикс: " << expr << std::endl;
     
@@ -101,7 +112,8 @@ int main() {
     std::cout << std::endl;
     
     double result = calculate(postfix);
-    std::cout << "Результат: " << result << std::endl;
-    
+    if (!postfix.empty() && postfix[0] != "ERROR_LETTER") {
+        std::cout << "Результат: " << result << std::endl;
+    }    
     return 0;
 }
