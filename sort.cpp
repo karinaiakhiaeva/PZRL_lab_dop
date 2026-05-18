@@ -74,7 +74,7 @@ std::vector<std::string> toPostfix(const std::string& infix) {
 double calculate(const std::vector<std::string>& postfix) {
     // Проверка на ошибку с буквой
     if (!postfix.empty() && postfix[0] == "ERROR_LETTER") {
-        std::cout << "ОШИБКА: Нельзя использовать буквы, только числа!" << std::endl;
+        std::cout << "ошибка: Нельзя использовать буквы" << std::endl;
         return 0;
     }
     
@@ -99,7 +99,7 @@ double calculate(const std::vector<std::string>& postfix) {
 }
 
 int main() {
-    std::string expr = "(1 + 3)/10*5-((2+3)*2+3)";
+    std::string expr = "(1 + 3)/10*5-((2+3)*2+3) + A";
     
     std::cout << "Инфикс: " << expr << std::endl;
     
