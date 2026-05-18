@@ -34,7 +34,7 @@ std::vector<std::string> toPostfix(const std::string& infix) {
             while (i < infix.size() && isOperand(infix[i])) {
                 if (isalpha(infix[i])) {
                     output.clear();
-                    output.push_back("ERROR_LETTER");
+                    output.push_back("ошибка буквы");
                     return output;
                 }
                 operand += infix[i];
@@ -73,7 +73,7 @@ std::vector<std::string> toPostfix(const std::string& infix) {
 
 double calculate(const std::vector<std::string>& postfix) {
     // Проверка на ошибку с буквой
-    if (!postfix.empty() && postfix[0] == "ERROR_LETTER") {
+    if (!postfix.empty() && postfix[0] == "ошибка буквы") {
         std::cout << "ошибка: Нельзя использовать буквы" << std::endl;
         return 0;
     }
@@ -112,7 +112,7 @@ int main() {
     std::cout << std::endl;
     
     double result = calculate(postfix);
-    if (!postfix.empty() && postfix[0] != "ERROR_LETTER") {
+    if (!postfix.empty() && postfix[0] != "ошибка буквы") {
         std::cout << "Результат: " << result << std::endl;
     }    
     return 0;
