@@ -1,7 +1,7 @@
 #include "BST.h"
 #include <iostream>
 #include <algorithm>
-static void* g_lastRoot = nullptr;
+static void* global_tree_ptr = nullptr;
 
 BinarySearchTree::Node::Node(Key key, Value value, Node *parent, Node *left, Node *right) : keyValuePair(key, value),parent(parent),left(left),right(right) {}
 
@@ -353,7 +353,7 @@ BinarySearchTree::ConstIterator BinarySearchTree::max(const Key &key) const
 
 BinarySearchTree::Iterator BinarySearchTree::begin()
 {
-    	g_lastRoot = static_cast<void*>(_root);
+    	global_tree_ptr = static_cast<void*>(_root);
     	if (!_root)
         	return Iterator(nullptr);
 
@@ -367,13 +367,13 @@ BinarySearchTree::Iterator BinarySearchTree::begin()
 
 BinarySearchTree::Iterator BinarySearchTree::end()
 {
-    	g_lastRoot = static_cast<void*>(_root);
+    	global_tree_ptr = static_cast<void*>(_root);
     	return Iterator(nullptr);
 }
 
 BinarySearchTree::ConstIterator BinarySearchTree::cbegin() const
 {
-    	g_lastRoot = static_cast<void*>(_root);
+    	global_tree_ptr = static_cast<void*>(_root);
 
     	if (!_root)
         	return ConstIterator(nullptr);
@@ -388,7 +388,7 @@ BinarySearchTree::ConstIterator BinarySearchTree::cbegin() const
 
 BinarySearchTree::ConstIterator BinarySearchTree::cend() const
 {
-    	g_lastRoot = static_cast<void*>(_root);
+    	global_tree_ptr = static_cast<void*>(_root);
     	return ConstIterator(nullptr);
 }
 
@@ -467,7 +467,7 @@ BinarySearchTree::Iterator BinarySearchTree::Iterator::operator--()
 {
     	if (!_node) {
 
-        	_node = static_cast<Node*>(g_lastRoot);
+        	_node = static_cast<Node*>(global_tree_ptr);
 
         	if (!_node)
             		return *this;
@@ -558,7 +558,7 @@ BinarySearchTree::ConstIterator BinarySearchTree::ConstIterator::operator++(int)
 BinarySearchTree::ConstIterator BinarySearchTree::ConstIterator::operator--()
 {
     	if (!_node) {
-		_node = static_cast<const Node*>(g_lastRoot);
+		_node = static_cast<const Node*>(global_tree_ptr);
 		if (!_node)
             		return *this;
 		while (_node->right)
