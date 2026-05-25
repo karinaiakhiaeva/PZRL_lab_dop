@@ -1,8 +1,9 @@
 #include "BST.h"
 #include <iostream>
 #include <algorithm>
-
 static void* global_tree_ptr = nullptr;
+
+
 
 
 BinarySearchTree::Node::Node(Key key, Value value, Node* par, Node* l, Node* r)
