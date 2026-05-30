@@ -9,7 +9,7 @@ static void* global_tree_ptr = nullptr;
 static const bool RED   = true;
 static const bool BLACK = false;
 
-// ===================== Node =====================
+
 
 BinarySearchTree::Node::Node(Key key, Value value, Node *parent, Node *left, Node *right)
     : keyValuePair(key, value), parent(parent), left(left), right(right), color(false) {}
@@ -49,7 +49,7 @@ void BinarySearchTree::Node::output_node_tree() const
 void BinarySearchTree::Node::insert(const Key &, const Value &) {}
 void BinarySearchTree::Node::erase(const Key &) {}
 
-// ===================== BinarySearchTree =====================
+
 
 BinarySearchTree::BinarySearchTree(const BinarySearchTree &other)
     : _size(other._size), _root(nullptr)
@@ -96,7 +96,7 @@ BinarySearchTree::~BinarySearchTree()
         erase(_root->keyValuePair.first);
 }
 
-// ===================== Insert =====================
+
 
 void BinarySearchTree::insert(const Key &key, const Value &value)
 {
@@ -183,7 +183,6 @@ void BinarySearchTree::insert(const Key &key, const Value &value)
     ++_size;
 }
 
-// ===================== Erase =====================
 
 void BinarySearchTree::erase(const Key &key)
 {
@@ -342,7 +341,6 @@ void BinarySearchTree::erase(const Key &key)
     }
 }
 
-// ===================== Find =====================
 
 BinarySearchTree::ConstIterator BinarySearchTree::find(const Key &key) const
 {
@@ -378,7 +376,6 @@ BinarySearchTree::Iterator BinarySearchTree::find(const Key &key)
     return result ? Iterator(result) : end();
 }
 
-// ===================== equalRange =====================
 
 std::pair<BinarySearchTree::Iterator, BinarySearchTree::Iterator>
 BinarySearchTree::equalRange(const Key &key)
@@ -400,7 +397,6 @@ BinarySearchTree::equalRange(const Key &key) const
     return {first, last};
 }
 
-// ===================== min / max =====================
 
 BinarySearchTree::ConstIterator BinarySearchTree::min() const
 {
@@ -438,7 +434,6 @@ BinarySearchTree::ConstIterator BinarySearchTree::max(const Key &key) const
     return best;
 }
 
-// ===================== begin / end =====================
 
 BinarySearchTree::Iterator BinarySearchTree::begin()
 {
@@ -470,7 +465,6 @@ BinarySearchTree::ConstIterator BinarySearchTree::cend() const
     return ConstIterator(nullptr);
 }
 
-// ===================== size / output / max_height =====================
 
 size_t BinarySearchTree::size() const { return _size; }
 
@@ -490,7 +484,6 @@ size_t BinarySearchTree::max_height() const
     return h(_root);
 }
 
-// ===================== Iterator =====================
 
 BinarySearchTree::Iterator::Iterator(Node *node) : _node(node) {}
 
@@ -545,7 +538,6 @@ BinarySearchTree::Iterator BinarySearchTree::Iterator::operator--(int)
 bool BinarySearchTree::Iterator::operator==(const Iterator &other) const { return _node == other._node; }
 bool BinarySearchTree::Iterator::operator!=(const Iterator &other) const { return _node != other._node; }
 
-// ===================== ConstIterator =====================
 
 BinarySearchTree::ConstIterator::ConstIterator(const Node *node) : _node(node) {}
 
